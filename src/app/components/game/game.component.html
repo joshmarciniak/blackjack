@@ -1,0 +1,8 @@
+<div *ngIf="!gameStart; else gameStarted">
+  <button type="button" name="button" (click)="onStartGame()">Start Game</button>
+</div>
+<ng-template #gameStarted>
+  <div>
+    <p>Game has started!</p>
+  </div>
+</ng-template>
