@@ -1,8 +1,10 @@
-<div *ngIf="!gameStart; else gameStarted">
-  <button type="button" name="button" (click)="onStartGame()">Start Game</button>
-</div>
+<ng-container *ngIf="!gameService.gameStarted$.value; else gameStarted">
+  <app-game-setup></app-game-setup>
+</ng-container>
 <ng-template #gameStarted>
-  <div>
-    <p>Game has started!</p>
+  <div *ngIf="tableDeck$ | async as tableDeck">
+    <ng-container *ngFor="let card of tableDeck.cards">
+      <p>{{ card.suit }} {{ card.type }}</p>
+    </ng-container> 
   </div>
 </ng-template>

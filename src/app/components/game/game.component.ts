@@ -1,27 +1,23 @@
-import { Component } from '@angular/core';
-import { CardTypes, Deck } from '../../models/cards.model';
-import { CardsService } from '../../services/cards.service';
-
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { Subject } from 'rxjs';
+import { Deck } from 'src/app/models/cards.model';
+import { GameService } from 'src/app/services/game.service';
 
 @Component({
   selector: 'app-game',
   templateUrl: './game.component.html'
 })
 
-export class GameComponent {
+export class GameComponent implements OnInit {
+  tableDeck$: Subject<Deck>;
 
   constructor(
-    private cardsService: CardsService
+    private fb: FormBuilder,
+    public gameService: GameService
   ) { }
 
-  gameStart: boolean = false;
-
-  onStartGame() {
-    this.gameStart = true;
-  
-    let deck: Deck = this.cardsService.createDeck(1);
-
-    deck = this.cardsService.shuffleDeck(deck);
-
+  ngOnInit(): void {
+    this.tableDeck$ = this.gameService.tableDeck$;
   }
 }
