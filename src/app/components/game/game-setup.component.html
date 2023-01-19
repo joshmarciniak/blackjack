@@ -1,0 +1,10 @@
+<form [formGroup]="gameSetupForm" (ngSubmit)="onStartGame()">
+  <label>Select Number of Decks: </label>
+  <input formControlName="decks" type="number" min="2" max="8" />
+  <div *ngIf="gameSetupForm.controls.decks.dirty && gameSetupForm.invalid">
+    <p>*Must choose a number of decks between 2 and 8!</p>
+  </div>
+  <button type="submit" name="button">Start Game</button>
+</form>
+
+
